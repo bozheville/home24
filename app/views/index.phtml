@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="home24demo">
+	<head>
+		<title>Home24.de[mo]</title>
+        <link rel="stylesheet" href="//home24demo.grybov.com/static/screen.css"/>
+	</head>
+	<body>
+		<?php echo $this->getContent(); ?>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyloadxt/1.0.5/jquery.lazyloadxt.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyloadxt/1.0.5/jquery.lazyloadxt.autoload.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.2.9/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="//home24demo.grybov.com/static/ngInfiniteScroll.js"></script>
+        <script src="//home24demo.grybov.com/static/app.js"></script>
+        <script>
+            $(function() {
+                $("img.lazy")
+                    .lazyload({effect : 'fadeIn'});
+            });
+        </script>
+	</body>
+</html>

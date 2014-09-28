@@ -1,0 +1,57 @@
+<div ng-controller="listing">
+    <header>
+        <h1>Home24.de[mo]</h1>
+        <div id="view-cart" ng-click="cart.show=true">
+            <div class="header">View cart</div>
+            <div class="summary">
+                <span ng-show="cart.total.price == 0;">Cart is empty</span>
+                <span ng-hide="cart.total.price == 0;">Total: {{cart.total}}&nbsp;&euro;</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="listing" infinite-scroll="loadMore()">
+        <div class="listing-item" ng-repeat="(k, product) in products track by $index">
+            <div class="img-wrapper">
+                <img class="lazy" data-src="http://home24demo.grybov.com/img/lnk/{{product.img}}" alt="{{product.title}}"  width="100" height="100"/>
+            </div>
+            <div class="info-wrapper">
+                <h2 class="title">{{product.title}}</h2>
+                <div class="price">{{product.price}}&nbsp;&euro;</div>
+                <div class="clear"></div>
+                <div class="add-to-cart" ng-click="cart.add(product.lnk)">
+                    Add to cart
+                </div>
+                <div class="clear"></div>
+                <div class="category">Category: {{product.category}}</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Footer
+    </footer>
+    <div id="cart" ng-show="cart.show">
+        <div class="close" ng-click="cart.show = false"></div>
+        <h1>Cart</h1>
+        <ul>
+            <li ng-repeat="(id, item) in cart.data track by $index">
+                {{item.title}}
+                <span class="count" ng-show="item.count > 1">{{item.count}}</span>:
+                <span class="price">{{item.price*item.count}}</span>&nbsp;&euro;
+                <span class="rm" ng-click="cart.rm(id);">Delete</span>
+            </li>
+            <li class="total">
+                Total: {{cart.total}}&nbsp;&euro; <span class="rm" ng-click="cart.clear()">Clear cart</span>
+            </li>
+        </ul>
+    </div>
+    <div class="alert" ng-class="{show: notification.show}">
+        Product <span class="title">{{notification.productTitle}}</span> added to <span class="linked" ng-click="cart.show=true">shopping cart.</span><br/><br/>
+        <label for="disallowNotifications">
+            <input type="checkbox" id="disallowNotifications" ng-model="notification.disallow"/>
+            Don't show again
+        </label>
+    </div>
+
+</div>
