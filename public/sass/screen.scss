@@ -57,8 +57,13 @@ h1{
     content: '';
     @include sprite(32px, 0px);
   }
+  .header{
+    text-decoration: underline;
+  }
   &:hover .header{
     color: $color-contrast;
+    text-decoration: none;
+
   }
   .summary{
     font-style: italic;

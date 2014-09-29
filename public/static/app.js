@@ -15,9 +15,10 @@ var home24demo = angular.module('home24demo', ['infinite-scroll', 'ngCookies'])
             $scope.config = {page: 0, max_page: 1, category: ''};
             $scope.products = [];
         };
-
+        var pageloaded = true;
         $scope.loadMore = function(){
-            if($scope.config.page < $scope.config.max_page){
+            if($scope.config.page < $scope.config.max_page && pageloaded){
+                pageloaded = false;
                 $scope.config.page++;
                 var lnk = '/listing';
                 if($scope.config.category != ''){
@@ -29,6 +30,7 @@ var home24demo = angular.module('home24demo', ['infinite-scroll', 'ngCookies'])
                     for(var i in e.data){
                         $scope.products.push(e.data[i]);
                     }
+                    pageloaded = true;
                 });
             }
         };
@@ -81,7 +83,7 @@ var home24demo = angular.module('home24demo', ['infinite-scroll', 'ngCookies'])
         $scope.new = {img:'',title:'',category:'',price:0};
         $scope.add = function(){
             $http.put('http://home24demo.grybov.com/api/add', $scope.new).success(function(e){
-                $scope.new = {img:'',title:'',category:'',price:0};
+                $scope.new = {img:'',title:'',category:$scope.new.category,price:0};
             });
         };
     });

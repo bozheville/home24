@@ -1,6 +1,7 @@
 <?php
 
 class ParentModel extends \Phalcon\Mvc\Collection {
+
     public static function getRandomString($base_len = 20, $rounds = 3, $alphatype = "luns") {
         $true_rounds = $rounds;
         $alphabet = array();

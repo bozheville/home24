@@ -6,4 +6,5 @@ class Product extends ParentModel {
     public $title = '';
     public $price = 0;
     public $category = '';
-} 
+
+}

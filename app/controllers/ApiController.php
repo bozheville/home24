@@ -9,17 +9,21 @@ class ApiController extends ControllerBase {
 
     public function listingAction() {
         $args = func_get_args();
+        $on_page = 10;
         if(preg_match('#^[0-9]+$#', end($args))){
             $current_page = array_pop($args);
         } else{
             $current_page = 1;
         }
-        $max_page = 3;
         try{
+            $condition = [];
+            $skip = $on_page * ($current_page - 1);
+            $count = Product::count($condition);
+            $max_page = ceil($count / $on_page);
             if($current_page > $max_page){
                 throw new Exception('Wrong page num', 400);
             }
-            $Products = Product::find();
+            $Products = Product::find(['conditions' => $condition,'limit' => $on_page, 'skip' => $skip]);
             $r = [];
             $keys = ['lnk', 'title', 'img', 'price', 'category'];
             foreach($Products as $product){
